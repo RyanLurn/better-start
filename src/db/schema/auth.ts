@@ -31,3 +31,28 @@ export const sessionTable = pgTable(
   },
   (table) => [index("sessions_user_id_idx").on(table.userId)]
 );
+
+export const accountTable = pgTable(
+  "accounts",
+  {
+    id,
+    userId,
+    accountId: text("account_id").notNull(),
+    providerId: text("provider_id").notNull(),
+    accessToken: text("access_token"),
+    refreshToken: text("refresh_token"),
+    accessTokenExpiresAt: timestamp("access_token_expires_at", {
+      mode: "date",
+      withTimezone: true,
+    }),
+    refreshTokenExpiresAt: timestamp("refresh_token_expires_at", {
+      mode: "date",
+      withTimezone: true,
+    }),
+    scope: text("scope"),
+    idToken: text("id_token"),
+    password: text("password"),
+    ...timestamps,
+  },
+  (table) => [index("accounts_user_id_idx").on(table.userId)]
+);
