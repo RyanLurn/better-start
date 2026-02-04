@@ -8,10 +8,10 @@ import { id } from "@/db/helpers/id";
 
 export const userTable = pgTable("users", {
   id,
-  name: text().notNull(),
-  email: text().notNull().unique(),
-  emailVerified: boolean().notNull(),
-  image: text(),
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
+  emailVerified: boolean("email_verified").notNull(),
+  image: text("image"),
   ...timestamps,
 });
 
