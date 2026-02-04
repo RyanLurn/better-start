@@ -1,13 +1,10 @@
-import { defineConfig } from "vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 import path from "node:path";
 
 export default defineConfig({
-  server: {
-    port: 5173,
-  },
   plugins: [
     tanstackStart(),
     // react's vite plugin must come after start's vite plugin
@@ -18,5 +15,8 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "src"),
     },
+  },
+  server: {
+    port: 5173,
   },
 });
