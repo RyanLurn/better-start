@@ -7,6 +7,7 @@ import {
   Outlet,
 } from "@tanstack/react-router";
 
+import { ThemeToggle } from "@/components/utils/theme-toggle";
 import { AppProviders } from "@/components/providers/app";
 import styles from "@/styles.css?url";
 
@@ -39,7 +40,10 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
         <HeadContent />
       </head>
       <body>
-        <AppProviders>{children}</AppProviders>
+        <AppProviders>
+          {children}
+          <ThemeToggle className="fixed top-3 right-3 z-50" />
+        </AppProviders>
         <Scripts />
       </body>
     </html>
