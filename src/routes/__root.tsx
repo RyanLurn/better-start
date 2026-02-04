@@ -23,7 +23,10 @@ export const Route = createRootRoute({
         title: "Better Start",
       },
     ],
-    links: [{ rel: "stylesheet", href: styles }],
+    links: [
+      { rel: "stylesheet", href: styles },
+      { type: "image/svg+xml", href: "/favicon.svg", rel: "icon" },
+    ],
   }),
   component: RootComponent,
 });
