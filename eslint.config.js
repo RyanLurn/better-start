@@ -1,6 +1,7 @@
 // @ts-check
 
 import { globalIgnores, defineConfig } from "eslint/config";
+import tanstackRouter from "@tanstack/eslint-plugin-router";
 import perfectionist from "eslint-plugin-perfectionist";
 import prettier from "eslint-config-prettier/flat";
 import reactHooks from "eslint-plugin-react-hooks";
@@ -23,6 +24,18 @@ export default defineConfig([
   ts.configs.recommendedTypeChecked,
   {
     rules: {
+      "@typescript-eslint/only-throw-error": [
+        "error",
+        {
+          allow: [
+            {
+              package: "@tanstack/router-core",
+              name: "Redirect",
+              from: "package",
+            },
+          ],
+        },
+      ],
       "@typescript-eslint/no-import-type-side-effects": "error",
       "@typescript-eslint/consistent-type-imports": "error",
     },
@@ -41,6 +54,7 @@ export default defineConfig([
     },
   },
   perfectionist.configs["recommended-line-length"],
+  tanstackRouter.configs["flat/recommended"],
   reactHooks.configs.flat.recommended,
   jsxA11y.flatConfigs.recommended,
   prettier,
