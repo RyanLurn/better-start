@@ -11,7 +11,8 @@
     "format": "bunx prettier . --write",
     "format:check": "bunx prettier . --check",
     "check": "bun run check-types && bun run lint && bun run format:check",
-    "fix": "bun run lint:fix && bun run format"
+    "fix": "bun run lint:fix && bun run format",
+    "sync-hooks": "bunx lefthook install"
   },
   "dependencies": {
     "@tanstack/react-router": "^1.158.0",
@@ -34,6 +35,7 @@
     "eslint-plugin-perfectionist": "^5.4.0",
     "eslint-plugin-react-hooks": "^7.0.1",
     "globals": "^17.3.0",
+    "lefthook": "^2.1.0",
     "prettier": "3.8.1",
     "prettier-plugin-curly": "0.4.1",
     "prettier-plugin-tailwindcss": "0.7.2",
