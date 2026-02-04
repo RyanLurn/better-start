@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { useTheme } from "@/hooks/use-theme";
 import { cn } from "@/lib/utils";
 
-function ThemeToggle({
+export function ThemeToggle({
   variant = "outline",
   className,
   ...properties
@@ -50,5 +50,3 @@ function ThemeToggle({
     </DropdownMenu>
   );
 }
-
-export { ThemeToggle };
