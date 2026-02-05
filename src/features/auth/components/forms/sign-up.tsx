@@ -33,8 +33,9 @@ export function SignUpForm() {
         toast.success("Check your email for a magic link");
       } else {
         toast.error(error.message);
-        form.reset();
       }
+
+      form.reset();
     },
     validators: {
       onSubmit: z.object({
@@ -49,9 +50,9 @@ export function SignUpForm() {
   });
 
   return (
-    <Card className="w-full sm:max-w-md">
-      <CardHeader>
-        <CardTitle>Welcome to Better Start</CardTitle>
+    <Card className="w-full sm:max-w-sm">
+      <CardHeader className="text-center">
+        <CardTitle className="text-lg">Welcome to Better Start</CardTitle>
         <CardDescription>
           Please enter your information below to sign up
         </CardDescription>
@@ -62,6 +63,7 @@ export function SignUpForm() {
             e.preventDefault();
             void form.handleSubmit();
           }}
+          id="sign-up-form"
         >
           <FieldGroup>
             <form.Field
@@ -74,10 +76,10 @@ export function SignUpForm() {
                     <FieldLabel htmlFor={field.name}>Name</FieldLabel>
                     <Input
                       onChange={(e) => field.handleChange(e.target.value)}
+                      placeholder="How should we call you?"
                       value={field.state.value}
                       onBlur={field.handleBlur}
                       aria-invalid={isInvalid}
-                      placeholder="Your name"
                       name={field.name}
                       id={field.name}
                       type="text"
@@ -89,7 +91,7 @@ export function SignUpForm() {
                 );
               }}
               validators={{
-                onBlur: NameSchema,
+                onChange: NameSchema,
               }}
               name="name"
             />
@@ -103,7 +105,7 @@ export function SignUpForm() {
                     <FieldLabel htmlFor={field.name}>Email address</FieldLabel>
                     <Input
                       onChange={(e) => field.handleChange(e.target.value)}
-                      placeholder="Your best email"
+                      placeholder="How can we contact you?"
                       value={field.state.value}
                       onBlur={field.handleBlur}
                       aria-invalid={isInvalid}
@@ -122,17 +124,23 @@ export function SignUpForm() {
                 );
               }}
               validators={{
-                onBlur: z.email(),
+                onChange: z.email(),
               }}
               name="email"
             />
           </FieldGroup>
         </form>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="justify-center">
         <form.Subscribe
-          children={({ isSubmitting, canSubmit }) => (
-            <Button disabled={!canSubmit || isSubmitting} type="submit">
+          children={({ isSubmitting, isPristine, canSubmit }) => (
+            <Button
+              disabled={!canSubmit || isSubmitting || isPristine}
+              form="sign-up-form"
+              className="w-full"
+              type="submit"
+              size="lg"
+            >
               {isSubmitting ? "Signing up..." : "Sign up"}
             </Button>
           )}
