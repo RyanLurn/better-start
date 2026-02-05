@@ -1,4 +1,5 @@
 import { useForm } from "@tanstack/react-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 import {
@@ -28,10 +29,11 @@ export function SignUpForm() {
         ...value,
       });
 
-      if (error) {
-        console.error(error);
+      if (data) {
+        toast.success("Check your email for a magic link");
       } else {
-        console.log(data);
+        toast.error(error.message);
+        form.reset();
       }
     },
     validators: {
