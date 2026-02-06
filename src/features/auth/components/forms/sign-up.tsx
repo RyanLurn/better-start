@@ -18,6 +18,7 @@ import {
   Field,
 } from "@/components/ui/field";
 import { NameSchema } from "@/features/auth/utils/schemas";
+import { Route as WelcomeRoute } from "@/routes/welcome";
 import { authClient } from "@/features/auth/client";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
@@ -28,6 +29,7 @@ export function SignUpForm() {
     onSubmit: async ({ value }) => {
       const { error, data } = await authClient.signIn.magicLink({
         ...value,
+        newUserCallbackURL: WelcomeRoute.to,
       });
 
       if (data) {
