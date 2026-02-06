@@ -17,6 +17,7 @@ import {
   FieldError,
   Field,
 } from "@/components/ui/field";
+import { Route as VerificationErrorRoute } from "@/routes/(auth)/verification-error";
 import { Route as DashboardRoute } from "@/routes/dashboard";
 import { NameSchema } from "@/features/auth/utils/schemas";
 import { Route as WelcomeRoute } from "@/routes/welcome";
@@ -30,6 +31,7 @@ export function SignUpForm() {
     onSubmit: async ({ value }) => {
       const { error, data } = await authClient.signIn.magicLink({
         ...value,
+        errorCallbackURL: VerificationErrorRoute.to,
         newUserCallbackURL: WelcomeRoute.to,
         callbackURL: DashboardRoute.to,
       });
