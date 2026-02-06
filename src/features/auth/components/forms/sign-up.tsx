@@ -17,6 +17,7 @@ import {
   FieldError,
   Field,
 } from "@/components/ui/field";
+import { Route as DashboardRoute } from "@/routes/dashboard";
 import { NameSchema } from "@/features/auth/utils/schemas";
 import { Route as WelcomeRoute } from "@/routes/welcome";
 import { authClient } from "@/features/auth/client";
@@ -30,6 +31,7 @@ export function SignUpForm() {
       const { error, data } = await authClient.signIn.magicLink({
         ...value,
         newUserCallbackURL: WelcomeRoute.to,
+        callbackURL: DashboardRoute.to,
       });
 
       if (data) {
