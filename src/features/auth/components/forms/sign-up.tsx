@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/field";
 import { NameSchema } from "@/features/auth/utils/schemas";
 import { authClient } from "@/features/auth/client";
+import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -141,7 +142,14 @@ export function SignUpForm() {
               type="submit"
               size="lg"
             >
-              {isSubmitting ? "Signing up..." : "Sign up"}
+              {isSubmitting ? (
+                <>
+                  <Spinner />
+                  Signing up...
+                </>
+              ) : (
+                "Sign up"
+              )}
             </Button>
           )}
         />
