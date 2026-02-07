@@ -39,7 +39,9 @@ export function SignUpForm() {
       if (data) {
         toast.success("Check your email for a magic link");
       } else {
-        toast.error(error.message);
+        toast.error(
+          error.message ?? "Something went wrong. Please try again later."
+        );
       }
 
       form.reset();
