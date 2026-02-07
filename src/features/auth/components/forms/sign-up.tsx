@@ -18,8 +18,8 @@ import {
   Field,
 } from "@/components/ui/field";
 import { Route as VerificationErrorRoute } from "@/routes/(auth)/verification-error";
+import { EmailSchema, NameSchema } from "@/features/auth/utils/schemas";
 import { Route as DashboardRoute } from "@/routes/dashboard";
-import { NameSchema } from "@/features/auth/utils/schemas";
 import { Route as WelcomeRoute } from "@/routes/welcome";
 import { authClient } from "@/features/auth/client";
 import { Spinner } from "@/components/ui/spinner";
@@ -48,7 +48,7 @@ export function SignUpForm() {
     },
     validators: {
       onSubmit: z.object({
-        email: z.email(),
+        email: EmailSchema,
         name: NameSchema,
       }),
     },
