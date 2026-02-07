@@ -75,73 +75,91 @@ export function SignUpForm() {
           id="sign-up-form"
         >
           <FieldGroup>
-            <form.Field
-              children={(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid;
+            <form.Subscribe<boolean>
+              children={(isSubmitting) => (
+                <form.Field
+                  children={(field) => {
+                    const isInvalid =
+                      field.state.meta.isTouched && !field.state.meta.isValid;
 
-                return (
-                  <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor={field.name}>Name</FieldLabel>
-                    <Input
-                      onChange={(e) => field.handleChange(e.target.value)}
-                      placeholder="How should we call you?"
-                      value={field.state.value}
-                      onBlur={field.handleBlur}
-                      aria-invalid={isInvalid}
-                      name={field.name}
-                      id={field.name}
-                      type="text"
-                    />
-                    {isInvalid && (
-                      <FieldError errors={field.state.meta.errors} />
-                    )}
-                  </Field>
-                );
-              }}
-              validators={{
-                onChange: NameSchema,
-              }}
-              name="name"
+                    return (
+                      <Field data-invalid={isInvalid}>
+                        <FieldLabel htmlFor={field.name}>Name</FieldLabel>
+                        <Input
+                          onChange={(e) => field.handleChange(e.target.value)}
+                          placeholder="How should we call you?"
+                          value={field.state.value}
+                          onBlur={field.handleBlur}
+                          aria-invalid={isInvalid}
+                          disabled={isSubmitting}
+                          name={field.name}
+                          id={field.name}
+                          type="text"
+                        />
+                        {isInvalid && (
+                          <FieldError errors={field.state.meta.errors} />
+                        )}
+                      </Field>
+                    );
+                  }}
+                  validators={{
+                    onChange: NameSchema,
+                  }}
+                  name="name"
+                />
+              )}
+              selector={(state) => state.isSubmitting}
             />
-            <form.Field
-              children={(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid;
+            <form.Subscribe<boolean>
+              children={(isSubmitting) => (
+                <form.Field
+                  children={(field) => {
+                    const isInvalid =
+                      field.state.meta.isTouched && !field.state.meta.isValid;
 
-                return (
-                  <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor={field.name}>Email address</FieldLabel>
-                    <Input
-                      onChange={(e) => field.handleChange(e.target.value)}
-                      placeholder="How can we contact you?"
-                      value={field.state.value}
-                      onBlur={field.handleBlur}
-                      aria-invalid={isInvalid}
-                      name={field.name}
-                      id={field.name}
-                      type="email"
-                    />
-                    <FieldDescription>
-                      A magic link will be sent to your email address to
-                      complete the sign up process
-                    </FieldDescription>
-                    {isInvalid && (
-                      <FieldError errors={field.state.meta.errors} />
-                    )}
-                  </Field>
-                );
-              }}
-              validators={{
-                onChange: z.email(),
-              }}
-              name="email"
+                    return (
+                      <Field data-invalid={isInvalid}>
+                        <FieldLabel htmlFor={field.name}>
+                          Email address
+                        </FieldLabel>
+                        <Input
+                          onChange={(e) => field.handleChange(e.target.value)}
+                          placeholder="How can we contact you?"
+                          value={field.state.value}
+                          onBlur={field.handleBlur}
+                          aria-invalid={isInvalid}
+                          disabled={isSubmitting}
+                          name={field.name}
+                          id={field.name}
+                          type="email"
+                        />
+                        <FieldDescription>
+                          A magic link will be sent to your email address to
+                          complete the sign up process
+                        </FieldDescription>
+                        {isInvalid && (
+                          <FieldError errors={field.state.meta.errors} />
+                        )}
+                      </Field>
+                    );
+                  }}
+                  validators={{
+                    onChange: z.email(),
+                  }}
+                  name="email"
+                />
+              )}
+              selector={(state) => state.isSubmitting}
             />
           </FieldGroup>
         </form>
       </CardContent>
       <CardFooter className="justify-center">
-        <form.Subscribe
+        <form.Subscribe<{
+          isSubmitting: boolean;
+          isPristine: boolean;
+          canSubmit: boolean;
+        }>
           children={({ isSubmitting, isPristine, canSubmit }) => (
             <Button
               disabled={!canSubmit || isSubmitting || isPristine}
@@ -160,6 +178,11 @@ export function SignUpForm() {
               )}
             </Button>
           )}
+          selector={(state) => ({
+            isSubmitting: state.isSubmitting,
+            isPristine: state.isPristine,
+            canSubmit: state.canSubmit,
+          })}
         />
       </CardFooter>
     </Card>
