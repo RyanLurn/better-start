@@ -108,6 +108,7 @@ export function SignUpForm() {
 
                     return (
                       <TextField
+                        description="A verification link will be sent to this email to complete the sign-up process."
                         placeholder="How can we contact you?"
                         handleChange={field.handleChange}
                         errors={field.state.meta.errors}

@@ -1,7 +1,12 @@
 import type { StandardSchemaV1Issue } from "@tanstack/react-form";
 import type { ComponentProps } from "react";
 
-import { FieldError, FieldLabel, Field } from "@/components/ui/field";
+import {
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+  Field,
+} from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 
 interface TextFieldProps extends ComponentProps<typeof Field> {
@@ -9,6 +14,7 @@ interface TextFieldProps extends ComponentProps<typeof Field> {
   handleChange: (value: string) => void;
   handleBlur: () => void;
   isSubmitting: boolean;
+  description?: string;
   placeholder: string;
   isInvalid: boolean;
   label: string;
@@ -22,6 +28,7 @@ export function TextField({
   isSubmitting,
   handleChange,
   placeholder,
+  description,
   handleBlur,
   isInvalid,
   errors,
@@ -46,6 +53,7 @@ export function TextField({
         name={name}
         id={id}
       />
+      {description && <FieldDescription>{description}</FieldDescription>}
       {isInvalid && <FieldError errors={errors} />}
     </Field>
   );

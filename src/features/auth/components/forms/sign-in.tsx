@@ -75,6 +75,7 @@ export function SignInForm() {
 
                     return (
                       <TextField
+                        description="A verification link will be sent to this email to complete the sign-in process."
                         placeholder="The email you used to sign up"
                         handleChange={field.handleChange}
                         errors={field.state.meta.errors}
