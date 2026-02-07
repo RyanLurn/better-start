@@ -11,14 +11,13 @@ import {
   Card,
 } from "@/components/ui/card";
 import { Route as VerificationErrorRoute } from "@/routes/(auth)/verification-error";
+import { SubmitButton } from "@/features/auth/components/forms/submit-button";
 import { EmailSchema, NameSchema } from "@/features/auth/utils/schemas";
 import { TextField } from "@/features/auth/components/forms/text-field";
 import { Route as DashboardRoute } from "@/routes/dashboard";
 import { Route as WelcomeRoute } from "@/routes/welcome";
 import { authClient } from "@/features/auth/client";
 import { FieldGroup } from "@/components/ui/field";
-import { Spinner } from "@/components/ui/spinner";
-import { Button } from "@/components/ui/button";
 
 export function SignUpForm() {
   const form = useForm({
@@ -141,22 +140,11 @@ export function SignUpForm() {
           canSubmit: boolean;
         }>
           children={({ isSubmitting, isPristine, canSubmit }) => (
-            <Button
-              disabled={!canSubmit || isSubmitting || isPristine}
-              form="sign-up-form"
-              className="w-full"
-              type="submit"
-              size="lg"
-            >
-              {isSubmitting ? (
-                <>
-                  <Spinner />
-                  Signing up...
-                </>
-              ) : (
-                "Sign up"
-              )}
-            </Button>
+            <SubmitButton
+              isSubmitting={isSubmitting}
+              isPristine={isPristine}
+              canSubmit={canSubmit}
+            />
           )}
           selector={(state) => ({
             isSubmitting: state.isSubmitting,
