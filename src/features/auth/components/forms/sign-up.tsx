@@ -18,6 +18,7 @@ import {
   Field,
 } from "@/components/ui/field";
 import { Route as VerificationErrorRoute } from "@/routes/(auth)/verification-error";
+import { NameField } from "@/features/auth/components/forms/fields/name";
 import { EmailSchema, NameSchema } from "@/features/auth/utils/schemas";
 import { Route as DashboardRoute } from "@/routes/dashboard";
 import { Route as WelcomeRoute } from "@/routes/welcome";
@@ -83,23 +84,16 @@ export function SignUpForm() {
                       field.state.meta.isTouched && !field.state.meta.isValid;
 
                     return (
-                      <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>Name</FieldLabel>
-                        <Input
-                          onChange={(e) => field.handleChange(e.target.value)}
-                          placeholder="How should we call you?"
-                          value={field.state.value}
-                          onBlur={field.handleBlur}
-                          aria-invalid={isInvalid}
-                          disabled={isSubmitting}
-                          name={field.name}
-                          id={field.name}
-                          type="text"
-                        />
-                        {isInvalid && (
-                          <FieldError errors={field.state.meta.errors} />
-                        )}
-                      </Field>
+                      <NameField
+                        handleChange={field.handleChange}
+                        errors={field.state.meta.errors}
+                        handleBlur={field.handleBlur}
+                        isSubmitting={isSubmitting}
+                        value={field.state.value}
+                        isInvalid={isInvalid}
+                        name={field.name}
+                        id={field.name}
+                      />
                     );
                   }}
                   validators={{
