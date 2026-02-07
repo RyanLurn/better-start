@@ -10,22 +10,15 @@ import {
   CardTitle,
   Card,
 } from "@/components/ui/card";
-import {
-  FieldDescription,
-  FieldGroup,
-  FieldLabel,
-  FieldError,
-  Field,
-} from "@/components/ui/field";
 import { Route as VerificationErrorRoute } from "@/routes/(auth)/verification-error";
-import { NameField } from "@/features/auth/components/forms/fields/name";
 import { EmailSchema, NameSchema } from "@/features/auth/utils/schemas";
+import { TextField } from "@/features/auth/components/forms/text-field";
 import { Route as DashboardRoute } from "@/routes/dashboard";
 import { Route as WelcomeRoute } from "@/routes/welcome";
 import { authClient } from "@/features/auth/client";
+import { FieldGroup } from "@/components/ui/field";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 export function SignUpForm() {
   const form = useForm({
@@ -84,7 +77,8 @@ export function SignUpForm() {
                       field.state.meta.isTouched && !field.state.meta.isValid;
 
                     return (
-                      <NameField
+                      <TextField
+                        placeholder="How should we call you?"
                         handleChange={field.handleChange}
                         errors={field.state.meta.errors}
                         handleBlur={field.handleBlur}
@@ -93,6 +87,8 @@ export function SignUpForm() {
                         isInvalid={isInvalid}
                         name={field.name}
                         id={field.name}
+                        label="Name"
+                        type="text"
                       />
                     );
                   }}
@@ -112,29 +108,19 @@ export function SignUpForm() {
                       field.state.meta.isTouched && !field.state.meta.isValid;
 
                     return (
-                      <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>
-                          Email address
-                        </FieldLabel>
-                        <Input
-                          onChange={(e) => field.handleChange(e.target.value)}
-                          placeholder="How can we contact you?"
-                          value={field.state.value}
-                          onBlur={field.handleBlur}
-                          aria-invalid={isInvalid}
-                          disabled={isSubmitting}
-                          name={field.name}
-                          id={field.name}
-                          type="email"
-                        />
-                        <FieldDescription>
-                          A magic link will be sent to your email address to
-                          complete the sign up process
-                        </FieldDescription>
-                        {isInvalid && (
-                          <FieldError errors={field.state.meta.errors} />
-                        )}
-                      </Field>
+                      <TextField
+                        placeholder="How can we contact you?"
+                        handleChange={field.handleChange}
+                        errors={field.state.meta.errors}
+                        handleBlur={field.handleBlur}
+                        isSubmitting={isSubmitting}
+                        value={field.state.value}
+                        isInvalid={isInvalid}
+                        label="Email address"
+                        name={field.name}
+                        id={field.name}
+                        type="email"
+                      />
                     );
                   }}
                   validators={{

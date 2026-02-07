@@ -4,40 +4,46 @@ import type { ComponentProps } from "react";
 import { FieldError, FieldLabel, Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 
-interface NameFieldProps extends ComponentProps<typeof Field> {
+interface TextFieldProps extends ComponentProps<typeof Field> {
   errors: (StandardSchemaV1Issue | undefined)[];
   handleChange: (value: string) => void;
   handleBlur: () => void;
   isSubmitting: boolean;
+  placeholder: string;
   isInvalid: boolean;
+  label: string;
   value: string;
+  type: string;
   name: string;
   id: string;
 }
 
-export function NameField({
+export function TextField({
   isSubmitting,
   handleChange,
+  placeholder,
   handleBlur,
   isInvalid,
   errors,
+  label,
   value,
   name,
+  type,
   id,
   ...props
-}: NameFieldProps) {
+}: TextFieldProps) {
   return (
     <Field data-invalid={isInvalid} {...props}>
-      <FieldLabel htmlFor={name}>Name</FieldLabel>
+      <FieldLabel htmlFor={name}>{label}</FieldLabel>
       <Input
         onChange={(e) => handleChange(e.target.value)}
-        placeholder="How should we call you?"
+        placeholder={placeholder}
         aria-invalid={isInvalid}
         disabled={isSubmitting}
         onBlur={handleBlur}
         value={value}
+        type={type}
         name={name}
-        type="text"
         id={id}
       />
       {isInvalid && <FieldError errors={errors} />}
