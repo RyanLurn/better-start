@@ -5,12 +5,16 @@ import { Button } from "@/components/ui/button";
 
 interface SubmitButtonProps extends ComponentProps<typeof Button> {
   isSubmitting: boolean;
+  loadingText: string;
   isPristine: boolean;
+  submitText: string;
   canSubmit: boolean;
 }
 
 export function SubmitButton({
   isSubmitting,
+  loadingText,
+  submitText,
   isPristine,
   canSubmit,
   ...props
@@ -27,10 +31,10 @@ export function SubmitButton({
       {isSubmitting ? (
         <>
           <Spinner />
-          Signing up...
+          {loadingText}
         </>
       ) : (
-        "Sign up"
+        submitText
       )}
     </Button>
   );

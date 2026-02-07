@@ -142,8 +142,10 @@ export function SignUpForm() {
           children={({ isSubmitting, isPristine, canSubmit }) => (
             <SubmitButton
               isSubmitting={isSubmitting}
+              loadingText="Signing up..."
               isPristine={isPristine}
               canSubmit={canSubmit}
+              submitText="Sign up"
             />
           )}
           selector={(state) => ({

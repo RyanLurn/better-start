@@ -109,8 +109,10 @@ export function SignInForm() {
           children={({ isSubmitting, isPristine, canSubmit }) => (
             <SubmitButton
               isSubmitting={isSubmitting}
+              loadingText="Signing in..."
               isPristine={isPristine}
               canSubmit={canSubmit}
+              submitText="Sign in"
             />
           )}
           selector={(state) => ({
