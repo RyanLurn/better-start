@@ -6,11 +6,13 @@ import { z } from "zod";
 import { SubmitButton } from "@/features/auth/components/forms/submit-button";
 import { TextField } from "@/features/auth/components/forms/text-field";
 import { NameSchema } from "@/features/auth/utils/schemas";
-import { getUser } from "@/features/auth/utils/get-user";
 import { authClient } from "@/features/auth/client";
+import { authMiddleware } from "@/middleware/auth";
 
 export const Route = createFileRoute("/welcome")({
-  loader: () => getUser(),
+  server: {
+    middleware: [authMiddleware],
+  },
   component: Welcome,
 });
 
