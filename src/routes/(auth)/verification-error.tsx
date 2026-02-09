@@ -19,9 +19,6 @@ function VerificationError() {
       <Button variant="outline" size="lg">
         <Link to="/sign-in">Try signing in again</Link>
       </Button>
-      <Button variant="outline" size="lg">
-        <Link to="/sign-up">Try signing up again</Link>
-      </Button>
     </div>
   );
 }
