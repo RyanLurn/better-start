@@ -49,6 +49,8 @@ export function SignInForm() {
     },
   });
 
+  const formId = "sign-in-form";
+
   return (
     <Card className="w-full sm:max-w-sm">
       <CardHeader className="text-center">
@@ -63,7 +65,7 @@ export function SignInForm() {
             e.preventDefault();
             void form.handleSubmit();
           }}
-          id="sign-up-form"
+          id={formId}
         >
           <FieldGroup>
             <form.Subscribe<boolean>
@@ -114,6 +116,7 @@ export function SignInForm() {
               isPristine={isPristine}
               canSubmit={canSubmit}
               submitText="Sign in"
+              formId={formId}
             />
           )}
           selector={(state) => ({
