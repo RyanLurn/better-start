@@ -13,7 +13,6 @@ import { Route as WelcomeRouteImport } from './routes/welcome'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as authVerificationErrorRouteImport } from './routes/(auth)/verification-error'
-import { Route as authSignUpRouteImport } from './routes/(auth)/sign-up'
 import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
@@ -37,11 +36,6 @@ const authVerificationErrorRoute = authVerificationErrorRouteImport.update({
   path: '/verification-error',
   getParentRoute: () => rootRouteImport,
 } as any)
-const authSignUpRoute = authSignUpRouteImport.update({
-  id: '/(auth)/sign-up',
-  path: '/sign-up',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const authSignInRoute = authSignInRouteImport.update({
   id: '/(auth)/sign-in',
   path: '/sign-in',
@@ -58,7 +52,6 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/welcome': typeof WelcomeRoute
   '/sign-in': typeof authSignInRoute
-  '/sign-up': typeof authSignUpRoute
   '/verification-error': typeof authVerificationErrorRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
@@ -67,7 +60,6 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/welcome': typeof WelcomeRoute
   '/sign-in': typeof authSignInRoute
-  '/sign-up': typeof authSignUpRoute
   '/verification-error': typeof authVerificationErrorRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
@@ -77,7 +69,6 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/welcome': typeof WelcomeRoute
   '/(auth)/sign-in': typeof authSignInRoute
-  '/(auth)/sign-up': typeof authSignUpRoute
   '/(auth)/verification-error': typeof authVerificationErrorRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
@@ -88,7 +79,6 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/welcome'
     | '/sign-in'
-    | '/sign-up'
     | '/verification-error'
     | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
@@ -97,7 +87,6 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/welcome'
     | '/sign-in'
-    | '/sign-up'
     | '/verification-error'
     | '/api/auth/$'
   id:
@@ -106,7 +95,6 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/welcome'
     | '/(auth)/sign-in'
-    | '/(auth)/sign-up'
     | '/(auth)/verification-error'
     | '/api/auth/$'
   fileRoutesById: FileRoutesById
@@ -116,7 +104,6 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   WelcomeRoute: typeof WelcomeRoute
   authSignInRoute: typeof authSignInRoute
-  authSignUpRoute: typeof authSignUpRoute
   authVerificationErrorRoute: typeof authVerificationErrorRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
@@ -151,13 +138,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authVerificationErrorRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(auth)/sign-up': {
-      id: '/(auth)/sign-up'
-      path: '/sign-up'
-      fullPath: '/sign-up'
-      preLoaderRoute: typeof authSignUpRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/(auth)/sign-in': {
       id: '/(auth)/sign-in'
       path: '/sign-in'
@@ -180,7 +160,6 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   WelcomeRoute: WelcomeRoute,
   authSignInRoute: authSignInRoute,
-  authSignUpRoute: authSignUpRoute,
   authVerificationErrorRoute: authVerificationErrorRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
