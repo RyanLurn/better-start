@@ -54,9 +54,9 @@ export function SignInForm() {
   return (
     <Card className="w-full sm:max-w-sm">
       <CardHeader className="text-center">
-        <CardTitle className="text-lg">Welcome back</CardTitle>
+        <CardTitle className="text-lg">Welcome to Better Start</CardTitle>
         <CardDescription>
-          Please enter your email below to sign in
+          Please enter your email below to continue
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -77,10 +77,10 @@ export function SignInForm() {
 
                     return (
                       <TextField
-                        description="A verification link will be sent to this email to complete the sign-in process."
-                        placeholder="The email you used to sign up"
+                        description="A verification link will be sent to this email to complete the process."
                         handleChange={field.handleChange}
                         errors={field.state.meta.errors}
+                        placeholder="example@gmail.com"
                         handleBlur={field.handleBlur}
                         isSubmitting={isSubmitting}
                         value={field.state.value}
@@ -111,11 +111,11 @@ export function SignInForm() {
         }>
           children={({ isSubmitting, isPristine, canSubmit }) => (
             <SubmitButton
+              loadingText="Sending link to your email..."
               isSubmitting={isSubmitting}
-              loadingText="Signing in..."
               isPristine={isPristine}
               canSubmit={canSubmit}
-              submitText="Sign in"
+              submitText="Continue"
               formId={formId}
             />
           )}
