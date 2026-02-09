@@ -9,6 +9,7 @@ interface SubmitButtonProps extends ComponentProps<typeof Button> {
   isPristine: boolean;
   submitText: string;
   canSubmit: boolean;
+  formId: string;
 }
 
 export function SubmitButton({
@@ -17,13 +18,14 @@ export function SubmitButton({
   submitText,
   isPristine,
   canSubmit,
+  formId,
   ...props
 }: SubmitButtonProps) {
   return (
     <Button
       disabled={!canSubmit || isSubmitting || isPristine}
-      form="sign-up-form"
       className="w-full"
+      form={formId}
       type="submit"
       size="lg"
       {...props}
