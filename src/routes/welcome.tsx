@@ -42,13 +42,14 @@ function Welcome() {
   const formId = "welcome-form";
 
   return (
-    <div className="flex h-dvh flex-col items-center justify-center gap-y-2">
+    <div className="flex h-dvh flex-col items-center justify-center gap-y-4">
       <h1 className="text-2xl font-bold">Welcome, let's get you started!</h1>
       <form
         onSubmit={(e) => {
           e.preventDefault();
           void form.handleSubmit();
         }}
+        className="flex flex-col gap-y-2"
         id={formId}
       >
         <form.Subscribe<boolean>
