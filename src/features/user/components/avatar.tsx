@@ -1,17 +1,27 @@
 import type { ComponentProps } from "react";
 
-import type { User } from "@/features/user/types";
-
 import { AvatarFallback, AvatarImage, Avatar } from "@/components/ui/avatar";
+import { authClient } from "@/features/auth/client";
+import { Spinner } from "@/components/ui/spinner";
 
-interface UserAvatarProps
-  extends ComponentProps<typeof Avatar>, Pick<User, "image" | "name"> {}
+export function UserAvatar({ ...props }: ComponentProps<typeof Avatar>) {
+  const { data } = authClient.useSession();
 
-export function UserAvatar({ image, name, ...props }: UserAvatarProps) {
+  if (!data) {
+    return (
+      <Avatar {...props}>
+        <Spinner />
+      </Avatar>
+    );
+  }
+
   return (
     <Avatar {...props}>
-      <AvatarImage src={image || undefined} alt={`${name}'s avatar`} />
-      <AvatarFallback>{name}</AvatarFallback>
+      <AvatarImage
+        src={data.user.image || undefined}
+        alt={`${data.user.name}'s avatar`}
+      />
+      <AvatarFallback>{data.user.name}</AvatarFallback>
     </Avatar>
   );
 }
