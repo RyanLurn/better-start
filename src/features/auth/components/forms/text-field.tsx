@@ -41,7 +41,7 @@ export function TextField({
 }: TextFieldProps) {
   return (
     <Field data-invalid={isInvalid} {...props}>
-      <FieldLabel htmlFor={name}>{label}</FieldLabel>
+      <FieldLabel htmlFor={id}>{label}</FieldLabel>
       <Input
         onChange={(e) => handleChange(e.target.value)}
         placeholder={placeholder}
