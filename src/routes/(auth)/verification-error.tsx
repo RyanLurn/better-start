@@ -53,9 +53,11 @@ function VerificationError() {
           <p>Please try again later.</p>
         )}
       </div>
-      <Button variant="outline" size="lg">
-        <Link to="/sign-in">Try signing in again</Link>
-      </Button>
+      <Button
+        render={<Link to="/sign-in">Try signing in again</Link>}
+        variant="outline"
+        size="lg"
+      />
     </div>
   );
 }
