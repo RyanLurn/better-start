@@ -9,6 +9,7 @@ import {
 
 import { ThemeToggle } from "@/components/utils/theme-toggle";
 import { AppProviders } from "@/components/providers/app";
+import { Toaster } from "@/components/ui/sonner";
 import styles from "@/styles.css?url";
 
 export const Route = createRootRoute({
@@ -43,6 +44,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
         <AppProviders>
           {children}
           <ThemeToggle className="fixed top-3 right-3 z-50" />
+          <Toaster position="top-center" richColors />
         </AppProviders>
         <Scripts />
       </body>
