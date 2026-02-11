@@ -5,4 +5,4 @@ export const NameSchema = z
   .min(3, "Name must be at least 3 characters long")
   .max(32, "Name cannot exceed 32 characters");
 
-export const EmailSchema = z.email().trim().toLowerCase();
+export const EmailSchema = z.string().trim().toLowerCase().pipe(z.email());
