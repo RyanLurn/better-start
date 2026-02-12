@@ -1,6 +1,7 @@
-import type { ComponentProps } from "react";
-
+import { type ComponentProps, useState } from "react";
 import { LogOutIcon, UserIcon } from "lucide-react";
+import { useRouter } from "@tanstack/react-router";
+import { toast } from "sonner";
 
 import type { User } from "@/features/user/types";
 
@@ -12,6 +13,7 @@ import {
   DropdownMenu,
 } from "@/components/ui/dropdown-menu";
 import { UserAvatar } from "@/features/user/components/avatar";
+import { authClient } from "@/features/auth/client";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -28,6 +30,21 @@ export function UserButton({
   userName,
   ...props
 }: UserButtonProps) {
+  const router = useRouter();
+  const [isSigningOut, setIsSigningOut] = useState(false);
+
+  async function signOut() {
+    setIsSigningOut(true);
+    const { error, data } = await authClient.signOut();
+
+    if (data?.success) {
+      await router.invalidate();
+    } else {
+      toast.error(error?.message ?? "Failed to sign out.");
+    }
+    setIsSigningOut(false);
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
@@ -43,14 +60,18 @@ export function UserButton({
         }
       />
       <DropdownMenuContent align="end">
-        <DropdownMenuItem>
+        <DropdownMenuItem disabled={isSigningOut}>
           <UserIcon />
           Profile
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem variant="destructive">
+        <DropdownMenuItem
+          onClick={() => void signOut()}
+          disabled={isSigningOut}
+          variant="destructive"
+        >
           <LogOutIcon />
-          Sign out
+          {isSigningOut ? "Signing out..." : "Sign out"}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
