@@ -21,7 +21,9 @@ export function UserAvatar({ ...props }: ComponentProps<typeof Avatar>) {
         src={data.user.image || undefined}
         alt={`${data.user.name}'s avatar`}
       />
-      <AvatarFallback>{data.user.name}</AvatarFallback>
+      <AvatarFallback>
+        {data.user.name.toUpperCase().slice(0, 2)}
+      </AvatarFallback>
     </Avatar>
   );
 }
