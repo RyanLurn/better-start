@@ -7,8 +7,10 @@ import {
   Outlet,
 } from "@tanstack/react-router";
 
+import { UserButton } from "@/features/user/components/button";
 import { ThemeToggle } from "@/components/utils/theme-toggle";
 import { AppProviders } from "@/components/providers/app";
+import { authClient } from "@/features/auth/client";
 import { Toaster } from "@/components/ui/sonner";
 import styles from "@/styles.css?url";
 
@@ -35,6 +37,8 @@ export const Route = createRootRoute({
 });
 
 function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
+  const { data } = authClient.useSession();
+
   return (
     <html suppressHydrationWarning lang="en">
       <head>
@@ -43,7 +47,11 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       <body>
         <AppProviders>
           {children}
-          <ThemeToggle className="fixed top-3 right-3 z-50" />
+          {data ? (
+            <UserButton className="fixed top-3 right-3 z-50" />
+          ) : (
+            <ThemeToggle className="fixed top-3 right-3 z-50" />
+          )}
           <Toaster position="top-center" richColors />
         </AppProviders>
         <Scripts />
