@@ -39,6 +39,7 @@ export function UserButton({
 
     if (data?.success) {
       await router.invalidate();
+      toast.success("Signed out successfully.");
     } else {
       toast.error(error?.message ?? "Failed to sign out.");
     }
