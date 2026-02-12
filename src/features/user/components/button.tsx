@@ -1,6 +1,8 @@
 import type { ComponentProps } from "react";
 
-import { LogOut, User } from "lucide-react";
+import { LogOutIcon, UserIcon } from "lucide-react";
+
+import type { User } from "@/features/user/types";
 
 import {
   DropdownMenuSeparator,
@@ -13,12 +15,19 @@ import { UserAvatar } from "@/features/user/components/avatar";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+interface UserButtonProps extends ComponentProps<typeof Button> {
+  userImage: User["image"];
+  userName: User["name"];
+}
+
 export function UserButton({
   variant = "ghost",
   size = "icon",
   className,
+  userImage,
+  userName,
   ...props
-}: ComponentProps<typeof Button>) {
+}: UserButtonProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
@@ -29,18 +38,18 @@ export function UserButton({
             size={size}
             {...props}
           >
-            <UserAvatar />
+            <UserAvatar image={userImage} name={userName} />
           </Button>
         }
       />
       <DropdownMenuContent align="end">
         <DropdownMenuItem>
-          <User />
+          <UserIcon />
           Profile
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem variant="destructive">
-          <LogOut />
+          <LogOutIcon />
           Sign out
         </DropdownMenuItem>
       </DropdownMenuContent>

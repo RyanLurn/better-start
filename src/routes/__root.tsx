@@ -48,7 +48,11 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
         <AppProviders>
           {children}
           {data ? (
-            <UserButton className="fixed top-3 right-3 z-50" />
+            <UserButton
+              className="fixed top-3 right-3 z-50"
+              userImage={data.user.image}
+              userName={data.user.name}
+            />
           ) : (
             <ThemeToggle className="fixed top-3 right-3 z-50" />
           )}
